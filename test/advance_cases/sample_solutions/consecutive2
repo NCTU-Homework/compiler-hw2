@@ -1,0 +1,27 @@
+<id: consecutive2>
+<;>
+1: consecutive2;
+2: 
+<KWbegin>
+3: begin
+<KWvar>
+<id: b>
+<:>
+<KWinteger>
+<;>
+4:     var b: integer;
+<id: b>
+<:=>
+<integer: 2>
+<;>
+5:     b := 2;
+<id: b>
+<:=>
+<not>
+<not>
+
+|--------------------------------------------------------------------------
+| Error found in Line #6:     b := not not
+|
+| Unmatched token: not
+|--------------------------------------------------------------------------
