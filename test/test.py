@@ -73,7 +73,7 @@ class Grader:
 
     def gen_output(self,case_type, case_id):
         if case_type == "basic":
-            test_case = "%s/%s/%s.p" % (self.basic_case_dir, "test-cases", self.basic_cases[case_id])
+            test_case = "%s/%s/%s.p" % (self.basic_case_dir, "test_cases", self.basic_cases[case_id])
             output_file = "%s/%s" % (self.output_dir, self.basic_cases[case_id])
         elif case_type == "advance":
             test_case = "%s/%s/%s.p" % (self.advance_case_dir, "test_cases", self.advance_cases[case_id])
