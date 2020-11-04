@@ -1,3 +1,4 @@
+//&T-
 consecutive2;
 
 begin

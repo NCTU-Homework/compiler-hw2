@@ -1,27 +1,14 @@
-<id: consecutive2>
-<;>
-1: consecutive2;
-2: 
-<KWbegin>
-3: begin
-<KWvar>
-<id: b>
-<:>
-<KWinteger>
-<;>
-4:     var b: integer;
-<id: b>
-<:=>
-<integer: 2>
-<;>
-5:     b := 2;
-<id: b>
-<:=>
-<not>
-<not>
+1: //&T-
+2: consecutive2;
+3: 
+4: begin
+5:     var b: integer;
+6:     b := 2;
+7:     b := not not b;
+8: 
+9: end
+10: end
 
-|--------------------------------------------------------------------------
-| Error found in Line #6:     b := not not
-|
-| Unmatched token: not
-|--------------------------------------------------------------------------
+|--------------------------------|
+|  There is no syntactic error!  |
+|--------------------------------|
