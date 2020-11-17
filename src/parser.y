@@ -16,9 +16,10 @@ static void yyerror(const char *msg);
 %token COMMA SEMI COLON L_BRACKET R_BRACKET L_SQBRACKET R_SQBRACKET LT LE NE GE GT EQ AND OR NOT ARRAY BEGINNING BOOL DEF DO ELSE ENDING FALSE FOR INT IF OF PRINT READ REAL STRING THEN TO TRUE RETURN VAR WHILE IDENTIFIER DEC_CONST OCT_CONST FLOAT_CONST SCIENTIFIC_CONST STRING_CONST
 %start program
 %right ASSIGN
+%left LE LT EQ NE GE GT 
 %left PLUS MINUS
 %left STAR DIV MOD
-
+%left AND OR NOT
 %%
 
 program:   IDENTIFIER SEMI var_const_decl_list func_decl_def_list compound ENDING;
@@ -32,11 +33,8 @@ procedure_def:  IDENTIFIER L_BRACKET arg_list R_BRACKET compound ENDING;
 
     /* (utility) */
 
-var_decl: VAR identifier_list COLON data_type SEMI
-        | VAR identifier_list COLON ARRAY int_const OF data_type SEMI
-        ;
+var_decl: VAR identifier_list COLON data_type SEMI;
 const_decl: VAR identifier_list COLON literal_const SEMI;
-
 var_ref: IDENTIFIER | array_ref;
 array_ref: IDENTIFIER sqbracket_list;
 
