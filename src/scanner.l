@@ -55,12 +55,12 @@ float {integer}\.(0|[0-9]*[1-9])
 
     /* Keyword */
 "array"   { TOKEN(KWarray); return ARRAY; }
-"begin"   { TOKEN(KWbegin); return BEGIN; }
+"begin"   { TOKEN(KWbegin); return BEGINNING; }
 "boolean" { TOKEN(KWboolean); return BOOL; }
 "def"     { TOKEN(KWdef); return DEF; }
 "do"      { TOKEN(KWdo); return DO; }
 "else"    { TOKEN(KWelse); return ELSE; }
-"end"     { TOKEN(KWend); return END; }
+"end"     { TOKEN(KWend); return ENDING; }
 "false"   { TOKEN(KWfalse); return FALSE; }
 "for"     { TOKEN(KWfor); return FOR; }
 "integer" { TOKEN(KWinteger); return INT; }
