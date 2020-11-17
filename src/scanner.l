@@ -28,67 +28,67 @@ float {integer}\.(0|[0-9]*[1-9])
 
 %%
     /* Delimiter */
-"," { TOKEN_CHAR(','); }
-";" { TOKEN_CHAR(';'); }
-":" { TOKEN_CHAR(':'); }
-"(" { TOKEN_CHAR('('); }
-")" { TOKEN_CHAR(')'); }
-"[" { TOKEN_CHAR('['); }
-"]" { TOKEN_CHAR(']'); }
+"," { TOKEN_CHAR(','); return COMMA; }
+";" { TOKEN_CHAR(';'); return SEMI; }
+":" { TOKEN_CHAR(':'); return COLON; }
+"(" { TOKEN_CHAR('('); return L_BRACKET; }
+")" { TOKEN_CHAR(')'); return R_BRACKET; }
+"[" { TOKEN_CHAR('['); return L_SQBRACKET; }
+"]" { TOKEN_CHAR(']'); return R_SQBRACKET; }
 
     /* Operator */
-"+"   { TOKEN_CHAR('+'); }
-"-"   { TOKEN_CHAR('-'); }
-"*"   { TOKEN_CHAR('*'); }
-"/"   { TOKEN_CHAR('/'); }
-"mod" { TOKEN(mod); }
-":="  { TOKEN(:=); }
-"<"   { TOKEN_CHAR('<'); }
-"<="  { TOKEN(<=); }
-"<>"  { TOKEN(<>); }
-">="  { TOKEN(>=); }
-">"   { TOKEN_CHAR('>'); }
-"="   { TOKEN_CHAR('='); }
-"and" { TOKEN(and); }
-"or"  { TOKEN(or); }
-"not" { TOKEN(not); }
+"+"   { TOKEN_CHAR('+'); return PLUS; }
+"-"   { TOKEN_CHAR('-'); return MINUS; }
+"*"   { TOKEN_CHAR('*'); return STAR; }
+"/"   { TOKEN_CHAR('/'); return DIV; }
+"mod" { TOKEN(mod); return MOD; }
+":="  { TOKEN(:=); return ASSIGN; }
+"<"   { TOKEN_CHAR('<'); return LT; }
+"<="  { TOKEN(<=); return LE; }
+"<>"  { TOKEN(<>); return NE; }
+">="  { TOKEN(>=); return GE; }
+">"   { TOKEN_CHAR('>'); return GT; }
+"="   { TOKEN_CHAR('='); return EQ; }
+"and" { TOKEN(and); return AND; }
+"or"  { TOKEN(or); return OR; }
+"not" { TOKEN(not); return NOT; }
 
     /* Keyword */
-"array"   { TOKEN(KWarray); }
-"begin"   { TOKEN(KWbegin); }
-"boolean" { TOKEN(KWboolean); }
-"def"     { TOKEN(KWdef); }
-"do"      { TOKEN(KWdo); }
-"else"    { TOKEN(KWelse); }
-"end"     { TOKEN(KWend); }
-"false"   { TOKEN(KWfalse); }
-"for"     { TOKEN(KWfor); }
-"integer" { TOKEN(KWinteger); }
-"if"      { TOKEN(KWif); }
-"of"      { TOKEN(KWof); }
-"print"   { TOKEN(KWprint); }
-"read"    { TOKEN(KWread); }
-"real"    { TOKEN(KWreal); }
-"string"  { TOKEN(KWstring); }
-"then"    { TOKEN(KWthen); }
-"to"      { TOKEN(KWto); }
-"true"    { TOKEN(KWtrue); }
-"return"  { TOKEN(KWreturn); }
-"var"     { TOKEN(KWvar); }
-"while"   { TOKEN(KWwhile); }
+"array"   { TOKEN(KWarray); return ARRAY; }
+"begin"   { TOKEN(KWbegin); return BEGIN; }
+"boolean" { TOKEN(KWboolean); return BOOL; }
+"def"     { TOKEN(KWdef); return DEF; }
+"do"      { TOKEN(KWdo); return DO; }
+"else"    { TOKEN(KWelse); return ELSE; }
+"end"     { TOKEN(KWend); return END; }
+"false"   { TOKEN(KWfalse); return FALSE; }
+"for"     { TOKEN(KWfor); return FOR; }
+"integer" { TOKEN(KWinteger); return INT; }
+"if"      { TOKEN(KWif); return IF; }
+"of"      { TOKEN(KWof); return OF; }
+"print"   { TOKEN(KWprint); return PRINT; }
+"read"    { TOKEN(KWread); return READ; }
+"real"    { TOKEN(KWreal); return REAL; }
+"string"  { TOKEN(KWstring); return STRING; }
+"then"    { TOKEN(KWthen); return THEN; }
+"to"      { TOKEN(KWto); return TO; }
+"true"    { TOKEN(KWtrue); return TRUE; }
+"return"  { TOKEN(KWreturn); return RETURN; }
+"var"     { TOKEN(KWvar); return VAR; }
+"while"   { TOKEN(KWwhile); return WHILE; }
 
     /* Identifier */
-[a-zA-Z][a-zA-Z0-9]* { TOKEN_STRING(id, yytext); }
+[a-zA-Z][a-zA-Z0-9]* { TOKEN_STRING(id, yytext); return IDENTIFIER; }
 
     /* Integer (decimal/octal) */
-{integer} { TOKEN_STRING(integer, yytext); }
-0[0-7]+   { TOKEN_STRING(oct_integer, yytext); }
+{integer} { TOKEN_STRING(integer, yytext); return DEC_CONST; }
+0[0-7]+   { TOKEN_STRING(oct_integer, yytext); return OCT_CONST; }
 
     /* Floating-Point */
-{float} { TOKEN_STRING(float, yytext); }
+{float} { TOKEN_STRING(float, yytext); return FLOAT_CONST; }
 
     /* Scientific Notation [Ee][+-]?[0-9]+ */
-({integer}|{float})[Ee][+-]?({integer}) { TOKEN_STRING(scientific, yytext); }
+({integer}|{float})[Ee][+-]?({integer}) { TOKEN_STRING(scientific, yytext); return SCIENTIFIC_CONST; }
 
     /* String */
 \"([^"\n]|\"\")*\" {
@@ -109,6 +109,7 @@ float {integer}\.(0|[0-9]*[1-9])
     }
     *str_ptr = '\0';
     TOKEN_STRING(string, string_literal);
+    return STRING_CONST;
 }
     /* Whitespace */
 [ \t]+ { LIST; }
