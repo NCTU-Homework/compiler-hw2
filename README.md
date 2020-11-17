@@ -213,7 +213,7 @@ Note that:
 
 2. The part of semantic checking will be handled in the 4th assignment. In this assignment, you don't need to check semantic errors like **"a := 3 + true;"**. Just take care of syntactic errors!
 
-3. Consecutive operators are **not** legal in an expression. (e.g. `--a` or `not not a`)
+3. Consecutive operators are  **legal** in an expression. (e.g. `--a` or `not not a`)
 
  - The **function invocation** has the form:
 
